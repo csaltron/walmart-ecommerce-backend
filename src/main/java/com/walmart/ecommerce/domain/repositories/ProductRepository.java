@@ -15,6 +15,16 @@ import java.util.Optional;
 public interface ProductRepository {
 
     /**
+     * Guarda un producto
+     */
+    Product save(Product product);
+
+    /**
+     * Guarda múltiples productos
+     */
+    List<Product> saveAll(List<Product> products);
+
+    /**
      * Busca un producto por su ID
      */
     Optional<Product> findById(String id);
@@ -28,4 +38,38 @@ public interface ProductRepository {
      * Busca productos por texto en nombre o descripción
      */
     Page<Product> searchByText(String searchText, Pageable pageable);
+
+    /**
+     * Busca productos aplicando filtros múltiples
+     */
+    Page<Product> findByFilters(
+            String searchText,
+            String category,
+            String brand,
+            BigDecimal minPrice,
+            BigDecimal maxPrice,
+            Boolean inStock,
+            List<String> tags,
+            Pageable pageable
+    );
+
+    /**
+     * Cuenta el total de productos
+     */
+    long count();
+
+    /**
+     * Elimina todos los productos
+     */
+    void deleteAll();
+
+    /**
+     * Obtiene todas las categorías únicas
+     */
+    List<String> findDistinctCategories();
+
+    /**
+     * Obtiene todas las marcas únicas
+     */
+    List<String> findDistinctBrands();
 }

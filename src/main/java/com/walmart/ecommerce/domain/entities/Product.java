@@ -25,17 +25,54 @@ public class Product {
 
     @Id
     private String id;
+
+    @TextIndexed(weight = 2)
     private String name;
+
+    @TextIndexed
     private String description;
+
+    @Indexed
     private String category;
+
+    @Indexed
     private String brand;
+
     private BigDecimal price;
+
     private BigDecimal oldPrice;
+
+    @Indexed
     private Integer stock;
 
     private List<String> tags;
 
     private String imageUrl;
-    private Boolean available;
 
+    /**
+     * Verifica si el producto está disponible en stock
+     */
+    public boolean isAvailable() {
+        return stock != null && stock > 0;
+    }
+
+    /**
+     * Verifica si el producto tiene descuento
+     */
+    public boolean hasDiscount() {
+        return oldPrice != null && oldPrice.compareTo(price) > 0;
+    }
+
+    /**
+     * Calcula el porcentaje de descuento
+     */
+    public Integer getDiscountPercentage() {
+        if (!hasDiscount()) {
+            return 0;
+        }
+        BigDecimal discount = oldPrice.subtract(price);
+        return discount.multiply(BigDecimal.valueOf(100))
+                .divide(oldPrice, 0, BigDecimal.ROUND_HALF_UP)
+                .intValue();
+    }
 }
