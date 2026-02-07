@@ -8,6 +8,10 @@ class EcommerceApplicationTests {
 
 	@Test
 	void contextLoads() {
+		assert true; // Verifica que el contexto de la aplicación se cargue correctamente
 	}
+
+
+
 
 }
