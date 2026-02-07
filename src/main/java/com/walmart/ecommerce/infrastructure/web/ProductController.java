@@ -26,7 +26,6 @@ import java.util.List;
 @RequestMapping("/v1/products")
 @RequiredArgsConstructor
 @Validated
-@Slf4j
 @Tag(name = "Products", description = "API de ecommerce de productos")
 @CrossOrigin(origins = "*")
 public class ProductController {
@@ -45,8 +44,7 @@ public class ProductController {
     public ResponseEntity<ProductResponse> getProductById(
             @Parameter(description = "ID del producto", required = true)
             @PathVariable String id) {
-        
-        log.info("GET /v1/products/{}", id);
+
         ProductResponse product = productService.findById(id);
         return ResponseEntity.ok(product);
     }
@@ -89,8 +87,6 @@ public class ProductController {
             
             @Parameter(description = "Dirección de ordenamiento (asc, desc)")
             @RequestParam(defaultValue = "asc") String sortDirection) {
-        
-        log.info("GET /v1/products - search={}, category={}, brand={}", search, category, brand);
 
         ProductSearchFilter filter = ProductSearchFilter.builder()
                 .searchText(search)
@@ -114,7 +110,6 @@ public class ProductController {
         description = "Retorna todas las categorías de productos disponibles"
     )
     public ResponseEntity<List<String>> getCategories() {
-        log.info("GET /v1/products/categories");
         List<String> categories = productService.getCategories();
         return ResponseEntity.ok(categories);
     }
@@ -125,7 +120,6 @@ public class ProductController {
         description = "Retorna todas las marcas de productos disponibles"
     )
     public ResponseEntity<List<String>> getBrands() {
-        log.info("GET /v1/products/brands");
         List<String> brands = productService.getBrands();
         return ResponseEntity.ok(brands);
     }

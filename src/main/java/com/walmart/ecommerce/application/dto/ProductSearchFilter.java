@@ -29,8 +29,12 @@ public class ProductSearchFilter {
      * Verifica si hay filtros aplicados
      */
     public boolean hasFilters() {
-        return searchText != null || category != null || brand != null ||
-               minPrice != null || maxPrice != null || inStock != null ||
-               (tags != null && !tags.isEmpty());
+        return searchText != null
+            || category != null
+            || brand != null
+            || minPrice != null
+            || maxPrice != null
+            || inStock != null
+            || (tags != null && !tags.isEmpty());
     }
 }

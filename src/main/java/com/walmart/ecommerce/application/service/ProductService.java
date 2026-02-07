@@ -21,13 +21,17 @@ import java.util.List;
  * Servicio de aplicación que orquesta la lógica de negocio del ecommerce.
  */
 @Service
-@RequiredArgsConstructor
 @Slf4j
 @Transactional(readOnly = true)
 public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
+        this.productRepository = productRepository;
+        this.productMapper = productMapper;
+    }
 
     /**
      * Obtiene un producto por su ID
