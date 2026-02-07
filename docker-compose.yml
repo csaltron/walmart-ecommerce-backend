@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: catalog-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: catalog_db
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - catalog-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  catalog-network:
+    driver: bridge
